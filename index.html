@@ -105,38 +105,15 @@
 
     /* === HERO === */
     .hero {
-      display: flex;
-      flex-direction: column;
-      gap: 34px;
-      align-items: stretch;
-      padding: 42px 0 40px;
-    }
-    .hero-media {
-      width: 100%;
-      max-width: 854px;
-      margin: 0 auto;
-    }
-    .hero-text {
-      width: 100%;
-      max-width: 760px;
-      margin: 0 auto;
-      text-align: center;
-    }
-    .hero-text .sub {
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .hero-text .cta-primary {
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .hero-text .cta-note {
-      justify-content: center;
+      display: grid;
+      grid-template-columns: 1.15fr .95fr;
+      gap: 56px;
+      align-items: center;
+      padding: 56px 0 40px;
     }
 
     .video-frame {
-      aspect-ratio: 854 / 480;
-      width: 100%;
+      aspect-ratio: 16/9;
       border-radius: 22px;
       overflow: hidden;
       border: 1px solid var(--line);
@@ -147,7 +124,7 @@
     .video-frame video {
       position: absolute; inset: 0;
       width: 100%; height: 100%;
-      object-fit: contain; display: block;
+      object-fit: cover; display: block;
       z-index: 1;
     }
     .hero-poster {
@@ -156,7 +133,13 @@
       object-fit: cover; display: block;
       z-index: 1;
     }
-    .video-frame::after { display: none; }
+    .video-frame::after {
+      content: ''; position: absolute; inset: 0;
+      border-radius: 21px;
+      background: linear-gradient(180deg, transparent 55%, rgba(9,9,11,.55));
+      pointer-events: none;
+      z-index: 2;
+    }
     .video-frame::before {
       content: '';
       position: absolute; inset: 0;
@@ -174,7 +157,7 @@
       to { --angle: 360deg }
     }
     .video-badge {
-      position: absolute; top: 16px; left: 16px; z-index: 4;
+      position: absolute; top: 16px; left: 16px; z-index: 2;
       display: flex; align-items: center; gap: 6px;
       background: rgba(9,9,11,.7);
       backdrop-filter: blur(6px);
@@ -306,16 +289,10 @@
     .benefit-card p { font-size: .89rem; color: var(--muted); line-height: 1.55 }
 
     /* === GALLERY === */
-    .top-media-gallery {
-      width: 100%;
-      max-width: 913px;
-      margin: -8px auto 0;
-    }
     .gallery-grid {
       display: grid;
-      grid-template-columns: 1fr;
-      gap: 18px;
-      width: 100%;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
     }
     .gallery-item {
       border-radius: var(--radius);
@@ -325,9 +302,17 @@
       transition: transform .3s ease, border-color .3s ease;
     }
     .gallery-item:hover { transform: scale(1.015); border-color: rgba(225,29,72,.3) }
-    .gallery-item { background: #0b0b0e; }
-    .gallery-item img { width: 100%; height: auto; object-fit: contain; display: block }
-    .gallery-item .overlay { display: none; }
+    .gallery-item img { width: 100%; height: auto; display: block }
+    .gallery-item .overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, transparent 50%, rgba(9,9,11,.85));
+      display: flex; align-items: flex-end; gap: 8px;
+      padding: 16px;
+      opacity: 0;
+      transition: opacity .3s ease;
+      color: #fff;
+      font-size: .84rem; font-weight: 700;
+    }
     .gallery-item:hover .overlay { opacity: 1 }
     .overlay .icon { width: 1.1em; height: 1.1em; color: var(--primary) }
 
@@ -473,8 +458,8 @@
     /* === RESPONSIVE === */
     @media (max-width: 900px) {
       body { padding-bottom: 92px }
-      .hero { gap: 28px; padding: 30px 0 30px }
-      .video-frame { aspect-ratio: 854 / 480; max-width: 854px; margin: 0 auto }
+      .hero { grid-template-columns: 1fr; gap: 30px; padding: 36px 0 30px }
+      .video-frame { aspect-ratio: 16/9; max-width: 480px; margin: 0 auto }
       .cta-primary { max-width: 100% }
       .benefits { grid-template-columns: 1fr }
       .gallery-grid { grid-template-columns: 1fr }
@@ -607,35 +592,9 @@
         <section class="hero">
           <div class="hero-media fade-up">
             <div class="video-frame">
-              <video autoplay muted loop playsinline preload="metadata" aria-label="Prévia do acesso VIP">
-                <source src="assets/vip-preview.mp4" type="video/mp4">
-              </video>
-              </div>
-          </div>
-          <div class="top-media-gallery">
-<div class="gallery-grid">
-          <div class="gallery-item fade-up">
-            <img src="assets/amostra-01.webp" alt="Amostra visual do conteúdo VIP" loading="lazy" decoding="async" />
-            <div class="overlay">
-              <svg class="icon">
-                <use href="#i-lock">
-                </use>
-              </svg>
-              Desbloqueie o catálogo completo
+              <img class="hero-poster" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%201600%20900%22%3E%0A%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%0A%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%22%20stop-color%3D%22%2309090b%22%2F%3E%0A%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22.55%22%20stop-color%3D%22%234c0519%22%2F%3E%0A%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23111116%22%2F%3E%0A%20%20%20%20%20%20%3C%2FlinearGradient%3E%0A%20%20%20%20%20%20%3CradialGradient%20id%3D%22r%22%3E%0A%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23e11d48%22%20stop-opacity%3D%22.5%22%2F%3E%0A%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23e11d48%22%20stop-opacity%3D%220%22%2F%3E%0A%20%20%20%20%20%20%3C%2FradialGradient%3E%0A%20%20%20%20%20%20%3Cfilter%20id%3D%22b%22%3E%3CfeGaussianBlur%20stdDeviation%3D%2270%22%2F%3E%3C%2Ffilter%3E%0A%20%20%20%20%3C%2Fdefs%3E%0A%20%20%20%20%3Crect%20width%3D%221600%22%20height%3D%22900%22%20fill%3D%22url(%23g)%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22420%22%20cy%3D%22270%22%20r%3D%22360%22%20fill%3D%22url(%23r)%22%20filter%3D%22url(%23b)%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%221280%22%20cy%3D%22720%22%20r%3D%22260%22%20fill%3D%22url(%23r)%22%20opacity%3D%22.45%22%20filter%3D%22url(%23b)%22%2F%3E%0A%20%20%20%20%3Cg%20fill%3D%22none%22%20stroke%3D%22%23fff%22%20stroke-opacity%3D%22.08%22%3E%0A%20%20%20%20%20%20%3Cpath%20d%3D%22M0%20720%20C400%20560%20780%20940%201600%20600%22%20stroke-width%3D%222%22%2F%3E%0A%20%20%20%20%20%20%3Cpath%20d%3D%22M0%20170%20C460%20360%20990%20-10%201600%20220%22%20stroke-width%3D%222%22%2F%3E%0A%20%20%20%20%3C%2Fg%3E%0A%20%20%20%20%3Ctext%20x%3D%22800%22%20y%3D%22430%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2CHelvetica%2Csans-serif%22%20font-weight%3D%22800%22%20font-size%3D%2282%22%20fill%3D%22%23fff%22%3EPR%C3%89VIA%20VIP%3C%2Ftext%3E%0A%20%20%20%20%3Ctext%20x%3D%22800%22%20y%3D%22505%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2CHelvetica%2Csans-serif%22%20font-size%3D%2234%22%20fill%3D%22%23d4d4d8%22%3EConte%C3%BAdo%20exclusivo%20dentro%20do%20Telegram%3C%2Ftext%3E%0A%20%20%20%20%3Crect%20x%3D%22650%22%20y%3D%22565%22%20width%3D%22300%22%20height%3D%2272%22%20rx%3D%2236%22%20fill%3D%22%23e11d48%22%20fill-opacity%3D%22.18%22%20stroke%3D%22%23e11d48%22%20stroke-opacity%3D%22.55%22%2F%3E%0A%20%20%20%20%3Ctext%20x%3D%22800%22%20y%3D%22612%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2CHelvetica%2Csans-serif%22%20font-weight%3D%22700%22%20font-size%3D%2228%22%20fill%3D%22%23fff%22%3EACESSO%20PRIVADO%20%E2%80%A2%20%2B18%3C%2Ftext%3E%0A%20%20%3C%2Fsvg%3E" alt="Prévia visual do acesso VIP">
             </div>
           </div>
-          <div class="gallery-item fade-up" style="transition-delay:.08s">
-            <img src="assets/amostra-02.webp" alt="Segunda amostra visual do conteúdo VIP" loading="lazy" decoding="async" />
-            <div class="overlay">
-              <svg class="icon">
-                <use href="#i-lock">
-                </use>
-              </svg>
-              Acesso exclusivo para membros
-            </div>
-          </div>
-        </div>
-</div>
           <div class="hero-text fade-up" style="transition-delay:.1s">
             <span class="kicker">            <svg class="icon">
               <use href="#i-lock">
@@ -769,6 +728,44 @@
             <p>
               Equipe disponível pelo Telegram para tirar dúvidas e resolver qualquer problema.
             </p>
+          </div>
+        </div>
+      </div>
+      <!-- GALLERY -->
+      <div class="wrap">
+        <div class="section-divider">
+        </div>
+        <div class="section-header fade-up">
+          <h2>
+            Uma
+            <span class="hl">            amostra
+</span>
+            do conteúdo
+          </h2>
+          <p>
+            Um pequeno gostinho do que te espera dentro do grupo VIP.
+          </p>
+        </div>
+        <div class="gallery-grid">
+          <div class="gallery-item fade-up">
+            <img src="data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%201600%20900%22%3E%0A%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%0A%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%22%20stop-color%3D%22%2309090b%22%2F%3E%0A%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22.55%22%20stop-color%3D%22%234c0519%22%2F%3E%0A%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23111116%22%2F%3E%0A%20%20%20%20%20%20%3C%2FlinearGradient%3E%0A%20%20%20%20%20%20%3CradialGradient%20id%3D%22r%22%3E%0A%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23e11d48%22%20stop-opacity%3D%22.5%22%2F%3E%0A%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23e11d48%22%20stop-opacity%3D%220%22%2F%3E%0A%20%20%20%20%20%20%3C%2FradialGradient%3E%0A%20%20%20%20%20%20%3Cfilter%20id%3D%22b%22%3E%3CfeGaussianBlur%20stdDeviation%3D%2270%22%2F%3E%3C%2Ffilter%3E%0A%20%20%20%20%3C%2Fdefs%3E%0A%20%20%20%20%3Crect%20width%3D%221600%22%20height%3D%22900%22%20fill%3D%22url(%23g)%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22420%22%20cy%3D%22270%22%20r%3D%22360%22%20fill%3D%22url(%23r)%22%20filter%3D%22url(%23b)%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%221280%22%20cy%3D%22720%22%20r%3D%22260%22%20fill%3D%22url(%23r)%22%20opacity%3D%22.45%22%20filter%3D%22url(%23b)%22%2F%3E%0A%20%20%20%20%3Cg%20fill%3D%22none%22%20stroke%3D%22%23fff%22%20stroke-opacity%3D%22.08%22%3E%0A%20%20%20%20%20%20%3Cpath%20d%3D%22M0%20720%20C400%20560%20780%20940%201600%20600%22%20stroke-width%3D%222%22%2F%3E%0A%20%20%20%20%20%20%3Cpath%20d%3D%22M0%20170%20C460%20360%20990%20-10%201600%20220%22%20stroke-width%3D%222%22%2F%3E%0A%20%20%20%20%3C%2Fg%3E%0A%20%20%20%20%3Ctext%20x%3D%22800%22%20y%3D%22430%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2CHelvetica%2Csans-serif%22%20font-weight%3D%22800%22%20font-size%3D%2282%22%20fill%3D%22%23fff%22%3ECAT%C3%81LOGO%20VIP%3C%2Ftext%3E%0A%20%20%20%20%3Ctext%20x%3D%22800%22%20y%3D%22505%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2CHelvetica%2Csans-serif%22%20font-size%3D%2234%22%20fill%3D%22%23d4d4d8%22%3EAtualiza%C3%A7%C3%B5es%20todos%20os%20dias%3C%2Ftext%3E%0A%20%20%20%20%3Crect%20x%3D%22650%22%20y%3D%22565%22%20width%3D%22300%22%20height%3D%2272%22%20rx%3D%2236%22%20fill%3D%22%23e11d48%22%20fill-opacity%3D%22.18%22%20stroke%3D%22%23e11d48%22%20stroke-opacity%3D%22.55%22%2F%3E%0A%20%20%20%20%3Ctext%20x%3D%22800%22%20y%3D%22612%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2CHelvetica%2Csans-serif%22%20font-weight%3D%22700%22%20font-size%3D%2228%22%20fill%3D%22%23fff%22%3EACESSO%20PRIVADO%20%E2%80%A2%20%2B18%3C%2Ftext%3E%0A%20%20%3C%2Fsvg%3E" alt="Preview catálogo VIP" loading="lazy" />
+            <div class="overlay">
+              <svg class="icon">
+                <use href="#i-lock">
+                </use>
+              </svg>
+              Desbloqueie o catálogo completo
+            </div>
+          </div>
+          <div class="gallery-item fade-up" style="transition-delay:.08s">
+            <img src="data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%201600%20900%22%3E%0A%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%0A%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%22%20stop-color%3D%22%2309090b%22%2F%3E%0A%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22.55%22%20stop-color%3D%22%23881337%22%2F%3E%0A%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23111116%22%2F%3E%0A%20%20%20%20%20%20%3C%2FlinearGradient%3E%0A%20%20%20%20%20%20%3CradialGradient%20id%3D%22r%22%3E%0A%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23be123c%22%20stop-opacity%3D%22.5%22%2F%3E%0A%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23be123c%22%20stop-opacity%3D%220%22%2F%3E%0A%20%20%20%20%20%20%3C%2FradialGradient%3E%0A%20%20%20%20%20%20%3Cfilter%20id%3D%22b%22%3E%3CfeGaussianBlur%20stdDeviation%3D%2270%22%2F%3E%3C%2Ffilter%3E%0A%20%20%20%20%3C%2Fdefs%3E%0A%20%20%20%20%3Crect%20width%3D%221600%22%20height%3D%22900%22%20fill%3D%22url(%23g)%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%221180%22%20cy%3D%22610%22%20r%3D%22360%22%20fill%3D%22url(%23r)%22%20filter%3D%22url(%23b)%22%2F%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22360%22%20cy%3D%22180%22%20r%3D%22260%22%20fill%3D%22url(%23r)%22%20opacity%3D%22.45%22%20filter%3D%22url(%23b)%22%2F%3E%0A%20%20%20%20%3Cg%20fill%3D%22none%22%20stroke%3D%22%23fff%22%20stroke-opacity%3D%22.08%22%3E%0A%20%20%20%20%20%20%3Cpath%20d%3D%22M0%20720%20C400%20560%20780%20940%201600%20600%22%20stroke-width%3D%222%22%2F%3E%0A%20%20%20%20%20%20%3Cpath%20d%3D%22M0%20170%20C460%20360%20990%20-10%201600%20220%22%20stroke-width%3D%222%22%2F%3E%0A%20%20%20%20%3C%2Fg%3E%0A%20%20%20%20%3Ctext%20x%3D%22800%22%20y%3D%22430%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2CHelvetica%2Csans-serif%22%20font-weight%3D%22800%22%20font-size%3D%2282%22%20fill%3D%22%23fff%22%3EACESSO%20COMPLETO%3C%2Ftext%3E%0A%20%20%20%20%3Ctext%20x%3D%22800%22%20y%3D%22505%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2CHelvetica%2Csans-serif%22%20font-size%3D%2234%22%20fill%3D%22%23d4d4d8%22%3EOrganizado%20e%20sem%20an%C3%BAncios%3C%2Ftext%3E%0A%20%20%20%20%3Crect%20x%3D%22650%22%20y%3D%22565%22%20width%3D%22300%22%20height%3D%2272%22%20rx%3D%2236%22%20fill%3D%22%23be123c%22%20fill-opacity%3D%22.18%22%20stroke%3D%22%23be123c%22%20stroke-opacity%3D%22.55%22%2F%3E%0A%20%20%20%20%3Ctext%20x%3D%22800%22%20y%3D%22612%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2CHelvetica%2Csans-serif%22%20font-weight%3D%22700%22%20font-size%3D%2228%22%20fill%3D%22%23fff%22%3EACESSO%20PRIVADO%20%E2%80%A2%20%2B18%3C%2Ftext%3E%0A%20%20%3C%2Fsvg%3E" alt="Preview modelos VIP" loading="lazy" />
+            <div class="overlay">
+              <svg class="icon">
+                <use href="#i-lock">
+                </use>
+              </svg>
+              Acesso exclusivo para membros
+            </div>
           </div>
         </div>
       </div>
