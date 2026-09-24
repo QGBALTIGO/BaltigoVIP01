@@ -156,13 +156,7 @@
       object-fit: cover; display: block;
       z-index: 1;
     }
-    .video-frame::after {
-      content: ''; position: absolute; inset: 0;
-      border-radius: 21px;
-      background: linear-gradient(180deg, transparent 55%, rgba(9,9,11,.55));
-      pointer-events: none;
-      z-index: 2;
-    }
+    .video-frame::after { display: none; }
     .video-frame::before {
       content: '';
       position: absolute; inset: 0;
@@ -312,12 +306,16 @@
     .benefit-card p { font-size: .89rem; color: var(--muted); line-height: 1.55 }
 
     /* === GALLERY === */
+    .top-media-gallery {
+      width: 100%;
+      max-width: 913px;
+      margin: -8px auto 0;
+    }
     .gallery-grid {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 22px;
-      max-width: 913px;
-      margin: 0 auto;
+      gap: 18px;
+      width: 100%;
     }
     .gallery-item {
       border-radius: var(--radius);
@@ -329,16 +327,7 @@
     .gallery-item:hover { transform: scale(1.015); border-color: rgba(225,29,72,.3) }
     .gallery-item { background: #0b0b0e; }
     .gallery-item img { width: 100%; height: auto; object-fit: contain; display: block }
-    .gallery-item .overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(180deg, transparent 50%, rgba(9,9,11,.85));
-      display: flex; align-items: flex-end; gap: 8px;
-      padding: 16px;
-      opacity: 0;
-      transition: opacity .3s ease;
-      color: #fff;
-      font-size: .84rem; font-weight: 700;
-    }
+    .gallery-item .overlay { display: none; }
     .gallery-item:hover .overlay { opacity: 1 }
     .overlay .icon { width: 1.1em; height: 1.1em; color: var(--primary) }
 
@@ -621,12 +610,32 @@
               <video autoplay muted loop playsinline preload="metadata" aria-label="Prévia do acesso VIP">
                 <source src="assets/vip-preview.mp4" type="video/mp4">
               </video>
-              <div class="video-badge">
-                <span class="live-dot"></span>
-                Prévia VIP
               </div>
+          </div>
+          <div class="top-media-gallery">
+<div class="gallery-grid">
+          <div class="gallery-item fade-up">
+            <img src="assets/amostra-01.webp" alt="Amostra visual do conteúdo VIP" loading="lazy" decoding="async" />
+            <div class="overlay">
+              <svg class="icon">
+                <use href="#i-lock">
+                </use>
+              </svg>
+              Desbloqueie o catálogo completo
             </div>
           </div>
+          <div class="gallery-item fade-up" style="transition-delay:.08s">
+            <img src="assets/amostra-02.webp" alt="Segunda amostra visual do conteúdo VIP" loading="lazy" decoding="async" />
+            <div class="overlay">
+              <svg class="icon">
+                <use href="#i-lock">
+                </use>
+              </svg>
+              Acesso exclusivo para membros
+            </div>
+          </div>
+        </div>
+</div>
           <div class="hero-text fade-up" style="transition-delay:.1s">
             <span class="kicker">            <svg class="icon">
               <use href="#i-lock">
@@ -760,44 +769,6 @@
             <p>
               Equipe disponível pelo Telegram para tirar dúvidas e resolver qualquer problema.
             </p>
-          </div>
-        </div>
-      </div>
-      <!-- GALLERY -->
-      <div class="wrap">
-        <div class="section-divider">
-        </div>
-        <div class="section-header fade-up">
-          <h2>
-            Uma
-            <span class="hl">            amostra
-</span>
-            do conteúdo
-          </h2>
-          <p>
-            Um pequeno gostinho do que te espera dentro do grupo VIP.
-          </p>
-        </div>
-        <div class="gallery-grid">
-          <div class="gallery-item fade-up">
-            <img src="assets/amostra-01.webp" alt="Amostra visual do conteúdo VIP" loading="lazy" decoding="async" />
-            <div class="overlay">
-              <svg class="icon">
-                <use href="#i-lock">
-                </use>
-              </svg>
-              Desbloqueie o catálogo completo
-            </div>
-          </div>
-          <div class="gallery-item fade-up" style="transition-delay:.08s">
-            <img src="assets/amostra-02.webp" alt="Segunda amostra visual do conteúdo VIP" loading="lazy" decoding="async" />
-            <div class="overlay">
-              <svg class="icon">
-                <use href="#i-lock">
-                </use>
-              </svg>
-              Acesso exclusivo para membros
-            </div>
           </div>
         </div>
       </div>
