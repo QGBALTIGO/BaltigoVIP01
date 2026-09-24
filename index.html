@@ -105,15 +105,38 @@
 
     /* === HERO === */
     .hero {
-      display: grid;
-      grid-template-columns: 1.15fr .95fr;
-      gap: 56px;
-      align-items: center;
-      padding: 56px 0 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 34px;
+      align-items: stretch;
+      padding: 42px 0 40px;
+    }
+    .hero-media {
+      width: 100%;
+      max-width: 854px;
+      margin: 0 auto;
+    }
+    .hero-text {
+      width: 100%;
+      max-width: 760px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .hero-text .sub {
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .hero-text .cta-primary {
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .hero-text .cta-note {
+      justify-content: center;
     }
 
     .video-frame {
-      aspect-ratio: 16/9;
+      aspect-ratio: 854 / 480;
+      width: 100%;
       border-radius: 22px;
       overflow: hidden;
       border: 1px solid var(--line);
@@ -124,7 +147,7 @@
     .video-frame video {
       position: absolute; inset: 0;
       width: 100%; height: 100%;
-      object-fit: cover; display: block;
+      object-fit: contain; display: block;
       z-index: 1;
     }
     .hero-poster {
@@ -291,8 +314,10 @@
     /* === GALLERY === */
     .gallery-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
+      grid-template-columns: 1fr;
+      gap: 22px;
+      max-width: 913px;
+      margin: 0 auto;
     }
     .gallery-item {
       border-radius: var(--radius);
@@ -302,8 +327,8 @@
       transition: transform .3s ease, border-color .3s ease;
     }
     .gallery-item:hover { transform: scale(1.015); border-color: rgba(225,29,72,.3) }
-    .gallery-item { aspect-ratio: 913 / 472; background: #0b0b0e; }
-    .gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block }
+    .gallery-item { background: #0b0b0e; }
+    .gallery-item img { width: 100%; height: auto; object-fit: contain; display: block }
     .gallery-item .overlay {
       position: absolute; inset: 0;
       background: linear-gradient(180deg, transparent 50%, rgba(9,9,11,.85));
@@ -459,8 +484,8 @@
     /* === RESPONSIVE === */
     @media (max-width: 900px) {
       body { padding-bottom: 92px }
-      .hero { grid-template-columns: 1fr; gap: 30px; padding: 36px 0 30px }
-      .video-frame { aspect-ratio: 16/9; max-width: 480px; margin: 0 auto }
+      .hero { gap: 28px; padding: 30px 0 30px }
+      .video-frame { aspect-ratio: 854 / 480; max-width: 854px; margin: 0 auto }
       .cta-primary { max-width: 100% }
       .benefits { grid-template-columns: 1fr }
       .gallery-grid { grid-template-columns: 1fr }
@@ -593,7 +618,7 @@
         <section class="hero">
           <div class="hero-media fade-up">
             <div class="video-frame">
-              <video autoplay muted loop playsinline preload="metadata" poster="assets/amostra-01.webp" aria-label="Prévia do acesso VIP">
+              <video autoplay muted loop playsinline preload="metadata" aria-label="Prévia do acesso VIP">
                 <source src="assets/vip-preview.mp4" type="video/mp4">
               </video>
               <div class="video-badge">
