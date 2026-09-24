@@ -607,7 +607,7 @@
         <section class="hero">
           <div class="hero-media fade-up">
             <div class="video-frame">
-              <video id="vipVideo" autoplay muted loop playsinline preload="auto" aria-label="Prévia do acesso VIP">
+              <video autoplay muted loop playsinline preload="metadata" aria-label="Prévia do acesso VIP">
                 <source src="assets/vip-preview.mp4" type="video/mp4">
               </video>
               </div>
@@ -615,7 +615,7 @@
           <div class="top-media-gallery">
 <div class="gallery-grid">
           <div class="gallery-item fade-up">
-            <img id="vipImage1" src="assets/amostra-01.webp" alt="Amostra visual do conteúdo VIP" loading="eager" decoding="async" />
+            <img src="assets/amostra-01.webp" alt="Amostra visual do conteúdo VIP" loading="lazy" decoding="async" />
             <div class="overlay">
               <svg class="icon">
                 <use href="#i-lock">
@@ -625,7 +625,7 @@
             </div>
           </div>
           <div class="gallery-item fade-up" style="transition-delay:.08s">
-            <img id="vipImage2" src="assets/amostra-02.webp" alt="Segunda amostra visual do conteúdo VIP" loading="eager" decoding="async" />
+            <img src="assets/amostra-02.webp" alt="Segunda amostra visual do conteúdo VIP" loading="lazy" decoding="async" />
             <div class="overlay">
               <svg class="icon">
                 <use href="#i-lock">
@@ -901,45 +901,6 @@
     <footer class="wrap">
       © 2026, todos os direitos reservados. Conteúdo para maiores de 18 anos.
     </footer>
-
-    <script src="media.js"><\/script>
-    <script>
-    // Usa o pacote de mídia em alta qualidade quando media.js estiver presente.
-    (() => {
-      const media = window.BALTIGO_MEDIA;
-      if (!media) return;
-
-      const urls = [];
-      const makeBlobUrl = (entry) => {
-        const binary = atob(entry.data);
-        const bytes = new Uint8Array(binary.length);
-        for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
-        const url = URL.createObjectURL(new Blob([bytes], { type: entry.mime }));
-        urls.push(url);
-        return url;
-      };
-
-      try {
-        const video = document.getElementById('vipVideo');
-        const image1 = document.getElementById('vipImage1');
-        const image2 = document.getElementById('vipImage2');
-
-        if (video && media.video) {
-          video.src = makeBlobUrl(media.video);
-          video.load();
-          video.play().catch(() => {});
-        }
-        if (image1 && media.image1) image1.src = makeBlobUrl(media.image1);
-        if (image2 && media.image2) image2.src = makeBlobUrl(media.image2);
-
-        window.addEventListener('pagehide', () => {
-          urls.forEach(url => URL.revokeObjectURL(url));
-        }, { once: true });
-      } catch (err) {
-        console.warn('Falha ao carregar mídia HQ; usando fallback.', err);
-      }
-    })();
-    <\/script>
     <script>
       // === INTERSECTION OBSERVER (fade-in) ===
     const observer = new IntersectionObserver((entries) => {
